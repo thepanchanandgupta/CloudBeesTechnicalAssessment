@@ -1,0 +1,51 @@
+// for syntax highlighting we use proto3 version
+syntax="proto3";
+
+// path to our current folder, where the generated files will be placed
+option go_package = "./proto";
+
+// package name for our proto file
+package assignment;
+
+message NoParam{}
+
+// when you are not passing any params still you will need to add a type
+// NoParam acts as a type for no parameters given.
+message HelloParam{
+    string name = 1;
+}
+
+message StringResponse {
+    string message = 1;
+}
+
+
+message Ticket {
+    int32 id=1;
+    string first_name = 2;
+    string last_name = 3;
+    string email = 4;
+    string from = 5;
+    string to = 6;
+    float price = 7;
+    string seat = 8;
+}
+
+message SeatSectionRequest {
+    string seat = 1;
+}
+
+message UserIDRequest {
+    string id = 1;
+}
+
+service Assignment {
+    // simple RPC
+    rpc SayHello(HelloParam) returns (StringResponse);
+    rpc BookTicket(Ticket) returns (Ticket);
+    rpc ShowAllTickets(NoParam) returns (stream Ticket);
+    rpc TicketsByType(SeatSectionRequest) returns (stream Ticket) {}
+    rpc RemoveUser(UserIDRequest) returns (StringResponse) {} // cancel tickets
+    rpc ModifyUser(UserIDRequest) returns (StringResponse) {}
+}
+
