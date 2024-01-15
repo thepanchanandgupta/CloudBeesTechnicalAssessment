@@ -88,25 +88,6 @@ func (s *AssignmentServer) TicketsByType(req *proto.SeatSectionRequest, stream p
 
 // RemoveUser ...
 // S5 An API to remove a user from the train
-// func (s AssignmentServer) RemoveUser(ctx context.Context, req *proto.UserIDRequest) (*proto.StringResponse, error) {
-// 	s.mu.Lock()
-// 	defer s.mu.Unlock()
-
-// 	var deleted bool
-// 	for i, ticket := range s.AllTickets {
-// 		id, _ := strconv.ParseInt(req.Id, 10, 32)
-// 		if ticket.Id == int32(id) {
-// 			s.AllTickets = append(s.AllTickets[:i], s.AllTickets[i+1:]...)
-// 			deleted = true
-// 			fmt.Printf("%+v", ticket)
-// 			break
-// 		}
-// 	}
-// 	if deleted {
-// 		return &proto.StringResponse{Message: "Delete"}, nil
-// 	}
-// 	return &proto.StringResponse{Message: "UserID not found"}, nil
-// }
 
 func (s *AssignmentServer) RemoveUser(ctx context.Context, req *proto.UserIDRequest) (*proto.StringResponse, error) {
 	s.mu.Lock()
